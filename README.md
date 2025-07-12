@@ -1,2 +1,2 @@
 # ProyectoRepo
-Software PerfilApp
+Software PerfilApp (Catalogo de aplicativos)
