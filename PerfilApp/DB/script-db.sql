@@ -36,7 +36,6 @@ CREATE TABLE IF NOT EXISTS `perfilApp`.`usuario` (
   `nombre` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
   `rol_idrol` INT NOT NULL,
-  `fecha_registro` DATE NOT NULL,
   PRIMARY KEY (`idusuario`),
   CONSTRAINT `fk_usuario_rol1`
     FOREIGN KEY (`rol_idrol`)
@@ -55,6 +54,7 @@ CREATE TABLE IF NOT EXISTS `perfilApp`.`catalogo` (
   `funcionApp` VARCHAR(50) NOT NULL,
   `tipoApp` VARCHAR(50) NOT NULL,
   `negoApp` VARCHAR(30) NOT NULL,
+  `fecha_registro` DATE NOT NULL,
   PRIMARY KEY (`idcatalogo`))
 ENGINE = InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
