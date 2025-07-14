@@ -34,7 +34,7 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `perfilApp`.`usuario` (
   `idusuario` INT NOT NULL,
   `nombre` VARCHAR(45) NOT NULL,
-  `password_hash` VARCHAR(45) NOT NULL,
+  `password_hash` VARCHAR(100) NOT NULL,
   `rol_idrol` INT NOT NULL,
   PRIMARY KEY (`idusuario`),
   CONSTRAINT `fk_usuario_rol1`
