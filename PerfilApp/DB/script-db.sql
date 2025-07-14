@@ -37,12 +37,12 @@ CREATE TABLE IF NOT EXISTS `perfilApp`.`usuario` (
   `password` VARCHAR(45) NOT NULL,
   `rol_idrol` INT NOT NULL,
   PRIMARY KEY (`idusuario`, `rol_idrol`),
-  INDEX `fk_usuario_rol1_idx` (`rol_idrol` ASC) VISIBLE,
   CONSTRAINT `fk_usuario_rol1`
     FOREIGN KEY (`rol_idrol`)
     REFERENCES `perfilApp`.`rol` (`idrol`)
-    ON DELETE CASCADE ON UPDATE CASCADE)
-ENGINE = InnoDB;
+    ON DELETE CASCADE ON UPDATE CASCADE
+)
+ENGINE = InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 
 -- -----------------------------------------------------
@@ -57,16 +57,16 @@ CREATE TABLE IF NOT EXISTS `perfilApp`.`infApp` (
   `estado` VARCHAR(10) NOT NULL,
   `tipo` VARCHAR(45) NOT NULL,
   `idioma` VARCHAR(45) NOT NULL,
-  `almacenamiento` DECIMAL NOT NULL,
+  `almacenamiento` DECIMAL(10,2) NOT NULL,
   `enlaceManual` VARCHAR(200) NOT NULL,
   `usuario_idusuario` INT NOT NULL,
   PRIMARY KEY (`idinfApp`, `usuario_idusuario`),
-  INDEX `fk_infApp_usuario1_idx` (`usuario_idusuario` ASC) VISIBLE,
   CONSTRAINT `fk_infApp_usuario1`
     FOREIGN KEY (`usuario_idusuario`)
     REFERENCES `perfilApp`.`usuario` (`idusuario`)
-    ON DELETE CASCADE ON UPDATE CASCADE)
-ENGINE = InnoDB;
+    ON DELETE CASCADE ON UPDATE CASCADE
+)
+ENGINE = InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 
 -- -----------------------------------------------------
@@ -80,12 +80,12 @@ CREATE TABLE IF NOT EXISTS `perfilApp`.`catalogo` (
   `negoApp` VARCHAR(30) NOT NULL,
   `infApp_idinfApp` INT NOT NULL,
   PRIMARY KEY (`idcatalogo`),
-  INDEX `fk_catalogo_infApp_idx` (`infApp_idinfApp` ASC) VISIBLE,
   CONSTRAINT `fk_catalogo_infApp`
     FOREIGN KEY (`infApp_idinfApp`)
     REFERENCES `perfilApp`.`infApp` (`idinfApp`)
-    ON DELETE CASCADE ON UPDATE CASCADE)
-ENGINE = InnoDB;
+    ON DELETE CASCADE ON UPDATE CASCADE
+)
+ENGINE = InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
