@@ -36,7 +36,8 @@ CREATE TABLE IF NOT EXISTS `perfilApp`.`usuario` (
   `nombre` VARCHAR(45) NOT NULL,
   `password` VARCHAR(45) NOT NULL,
   `rol_idrol` INT NOT NULL,
-  PRIMARY KEY (`idusuario`, `rol_idrol`),
+  `fecha_registro` DATE NOT NULL,
+  PRIMARY KEY (`idusuario`),
   CONSTRAINT `fk_usuario_rol1`
     FOREIGN KEY (`rol_idrol`)
     REFERENCES `perfilApp`.`rol` (`idrol`)
@@ -46,10 +47,23 @@ ENGINE = InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 
 -- -----------------------------------------------------
+-- Table `perfilApp`.`catalogo`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `perfilApp`.`catalogo` (
+  `idcatalogo` INT NOT NULL AUTO_INCREMENT,
+  `nomApp` VARCHAR(60) NOT NULL,
+  `funcionApp` VARCHAR(50) NOT NULL,
+  `tipoApp` VARCHAR(50) NOT NULL,
+  `negoApp` VARCHAR(30) NOT NULL,
+  PRIMARY KEY (`idcatalogo`))
+ENGINE = InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+
+
+-- -----------------------------------------------------
 -- Table `perfilApp`.`infApp`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `perfilApp`.`infApp` (
-  `idinfApp` INT NOT NULL,
+  `idinfApp` INT NOT NULL AUTO_INCREMENT,
   `version` VARCHAR(45) NOT NULL,
   `ultActualizacion` DATE NOT NULL,
   `desarrollador` VARCHAR(45) NOT NULL,
@@ -60,32 +74,17 @@ CREATE TABLE IF NOT EXISTS `perfilApp`.`infApp` (
   `almacenamiento` DECIMAL(10,2) NOT NULL,
   `enlaceManual` VARCHAR(200) NOT NULL,
   `usuario_idusuario` INT NOT NULL,
-  PRIMARY KEY (`idinfApp`, `usuario_idusuario`),
+  `catalogo_idcatalogo` INT NOT NULL,
+  PRIMARY KEY (`idinfApp`),
   CONSTRAINT `fk_infApp_usuario1`
     FOREIGN KEY (`usuario_idusuario`)
     REFERENCES `perfilApp`.`usuario` (`idusuario`)
-    ON DELETE CASCADE ON UPDATE CASCADE
-)
-ENGINE = InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
-
-
--- -----------------------------------------------------
--- Table `perfilApp`.`catalogo`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `perfilApp`.`catalogo` (
-  `idcatalogo` INT NOT NULL,
-  `nomApp` VARCHAR(60) NOT NULL,
-  `funcionApp` VARCHAR(50) NOT NULL,
-  `tipoApp` VARCHAR(50) NOT NULL,
-  `negoApp` VARCHAR(30) NOT NULL,
-  `infApp_idinfApp` INT NOT NULL,
-  PRIMARY KEY (`idcatalogo`),
-  CONSTRAINT `fk_catalogo_infApp`
-    FOREIGN KEY (`infApp_idinfApp`)
-    REFERENCES `perfilApp`.`infApp` (`idinfApp`)
-    ON DELETE CASCADE ON UPDATE CASCADE
-)
-ENGINE = InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+    ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `fk_infApp_catalogo1`
+    FOREIGN KEY (`catalogo_idcatalogo`)
+    REFERENCES `perfilApp`.`catalogo` (`idcatalogo`)
+    ON DELETE CASCADE ON UPDATE CASCADE)
+ENGINE = InnoDB;DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
