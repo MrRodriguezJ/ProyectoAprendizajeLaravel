@@ -22,8 +22,9 @@
 
     </form>
     <br>
-
-    Resultado de la suma: 
-
+    @if(isset($resultado))
+        <p>la suma de los dos números es: {{$resultado}}</p>
+    @endif
+    
 </body>
 </html>
